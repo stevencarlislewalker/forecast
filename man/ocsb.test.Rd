@@ -7,13 +7,6 @@
 \usage{
 ocsb.test(x, lag.method = c("fixed", "AIC", "BIC", "AICc"), maxlag = 0)
 }
-\arguments{
-\item{x}{a univariate seasonal time series.}
-
-\item{lag.method}{a character specifying the lag order selection method.}
-
-\item{maxlag}{the maximum lag order to be considered by \code{lag.method}.}
-}
 \value{
 ocsb.test returns a list of class "OCSBtest" with the following components:
 * statistics the value of the test statistics.

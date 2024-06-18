@@ -4,7 +4,7 @@
 \alias{tsoutliers}
 \title{Identify and replace outliers in a time series}
 \usage{
-tsoutliers(x, iterate = 2, lambda = NULL)
+tsoutliers(x, iterate = 2, lambda = NULL, threshold = 3)
 }
 \arguments{
 \item{x}{time series}
@@ -15,6 +15,9 @@ tsoutliers(x, iterate = 2, lambda = NULL)
 then a transformation is automatically selected using \code{BoxCox.lambda}.
 The transformation is ignored if NULL. Otherwise,
 data transformed before model is estimated.}
+
+\item{threshold}{how many IQRs from the centre before declaring observations
+as outliers}
 }
 \value{
 \item{index}{Indicating the index of outlier(s)}

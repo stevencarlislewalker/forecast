@@ -155,6 +155,8 @@ tsclean <- function(x, replace.missing=TRUE, iterate=2, lambda = NULL) {
 #'
 #' @param x time series
 #' @param iterate the number of iterations required
+#' @param threshold how many IQRs from the centre before declaring observations
+#' as outliers
 #' @inheritParams forecast.ts
 #' @return \item{index}{Indicating the index of outlier(s)}
 #' \item{replacement}{Suggested numeric values to replace identified outliers}
@@ -168,7 +170,7 @@ tsclean <- function(x, replace.missing=TRUE, iterate=2, lambda = NULL) {
 #' tsoutliers(gold)
 #'
 #' @export
-tsoutliers <- function(x, iterate=2, lambda=NULL) {
+tsoutliers <- function(x, iterate=2, lambda=NULL, threshold = 3) {
   n <- length(x)
   freq <- frequency(x)
 
@@ -217,7 +219,7 @@ tsoutliers <- function(x, iterate=2, lambda=NULL) {
   # Limits of acceptable residuals
   resid.q <- quantile(resid, probs = c(0.25, 0.75), na.rm = TRUE)
   iqr <- diff(resid.q)
-  limits <- resid.q + 3 * iqr * c(-1, 1)
+  limits <- resid.q + threshold * iqr * c(-1, 1)
 
   # Find residuals outside limits
   if ((limits[2] - limits[1]) > 1e-14) {
